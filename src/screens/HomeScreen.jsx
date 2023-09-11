@@ -8,6 +8,8 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import {Container} from 'react-bootstrap'
 import SocialMediaLink from "../components/SocialMediaLink";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
 
 // import data from '../data';
 
@@ -50,6 +52,8 @@ function HomeScreen() {
       <Helmet>
         <title>ABS style spot</title>
       </Helmet>
+    <Header/>
+    <Outlet/>
       <div className="home">
         <h1>Featured Products</h1>
       </div>
@@ -68,7 +72,7 @@ function HomeScreen() {
           </Row>
         )}
           </div> 
-          <SocialMediaLink/>
+          {/* <SocialMediaLink/> */}
             </Container>
   );
 }

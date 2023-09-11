@@ -6,7 +6,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,7 +14,7 @@ import axios from "axios";
 
 const SocialMediaLink = () => {
     const [socialMedia, setSocialMedia] = useState({})
-      const navigate = useNavigate()
+  
     useEffect(()=> {
            const fetchData = async () => {
 

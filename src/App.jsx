@@ -36,6 +36,8 @@ import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import DisplayScreen from './screens/DisplayScreen';
+import Header from "./screens/Header";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -63,21 +65,20 @@ function App() {
     fetchCategories();
   }, []);
   return (
-    
-      <div
-        className={
-          sidebarIsOpen
-            ? fullBox
-              ? "site-container active-cont d-flex flex-column full-box w-100vw"
-              : "site-container active-cont d-flex flex-column"
-            : fullBox
-            ? "site-container d-flex flex-column full-box"
-            : "site-container d-flex flex-column w-100vw"
-        }
-      >
-        <ToastContainer position="bottom-center" limit={1} />
+    <div
+      className={
+        sidebarIsOpen
+          ? fullBox
+            ? "site-container active-cont d-flex flex-column full-box w-100vw"
+            : "site-container active-cont d-flex flex-column"
+          : fullBox
+          ? "site-container d-flex flex-column full-box"
+          : "site-container d-flex flex-column w-100vw"
+      }
+    >
+      <ToastContainer position="bottom-center" limit={1} />
 
-        <header
+      <header
           style={{ width: "100vw", position: "sticky", top: 0, zIndex: "1" }}
         >
           <Navbar bg="primary" variant="light" expand="lg">
@@ -181,7 +182,7 @@ function App() {
               {categories && categories.map((category) => (
                 <Nav.Item key={category.key}>
                   <LinkContainer
-                    to={{ pathname: "/search", search: `category=${category}` }}
+                    to={{ pathname: "/search", search: `/category=${category}` }}
                     onClick={() => setSidebarIsOpen(false)}
                   >
                     <Nav.Link>{category}</Nav.Link>
@@ -191,124 +192,121 @@ function App() {
             </Nav>
           </div>
         </div>
-        <main>
-          <Container className="mt-3">
-            <Routes>
-              <Route path="/product/:slug" element={<ProductScreen />} />
-              <Route path="/cart" element={<CartScreen />} />
+      <main>
+        <Container className="mt-3">
+          <Routes>
+            <Route path="/" element={<DisplayScreen />}>
+              <Route index element={<HomeScreen />} />
+            </Route>
+            <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route path="/cart" element={<CartScreen />} />
 
-              <Route path="/search" element={<SearchScreen />} />
-              <Route path="/signin" element={<SigninScreen />} />
-              <Route path="/signup" element={<SignupScreen />} />
-              {/* <Route path="/display" element={<DisplayScreen />} /> */}
-              <Route
-                path="/forget-password"
-                element={<ForgetPasswordScreen />}
-              />
-              <Route
-                path="/reset-password/:token"
-                element={<ResetPasswordScreen />}
-              />
+            <Route path="/search" element={<SearchScreen />} />
+            <Route path="/Herder" element={<Header />} />
 
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <ProfileScreen />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/map"
-                element={
-                  <ProtectedRoute>
-                    <MapScreen />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route
-                path="/order/:id"
-                element={
-                  <ProtectedRoute>
-                    <OrderScreen />{" "}
-                  </ProtectedRoute>
-                }
-              ></Route>
-              <Route
-                path="/orderhistory"
-                element={
-                  <ProtectedRoute>
-                    {" "}
-                    <OrderHistoryScreen />
-                  </ProtectedRoute>
-                }
-              ></Route>
-              <Route
-                path="/shipping"
-                element={<ShippingAddressScreen />}
-              ></Route>
-              <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+            <Route path="/signin" element={<SigninScreen />} />
+            <Route path="/signup" element={<SignupScreen />} />
+            {/* <Route path="/display" element={<DisplayScreen />} /> */}
+            <Route path="/forget-password" element={<ForgetPasswordScreen />} />
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPasswordScreen />}
+            />
 
-              {/* Admin Routes */}
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <AdminRoute>
-                    <DashboardScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path="/admin/orders"
-                element={
-                  <AdminRoute>
-                    <OrderListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path="/admin/users"
-                element={
-                  <AdminRoute>
-                    <UserListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path="/admin/products"
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path="/admin/product/:id"
-                element={
-                  <AdminRoute>
-                    {" "}
-                    <ProductEditScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path="/admin/user/:id"
-                element={
-                  <AdminRoute>
-                    <UserEditScreen />
-                  </AdminRoute>
-                }
-              ></Route>
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfileScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/map"
+              element={
+                <ProtectedRoute>
+                  <MapScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderScreen />{" "}
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/orderhistory"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <OrderHistoryScreen />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
+            <Route path="/payment" element={<PaymentMethodScreen />}></Route>
 
-              <Route path="/" element={<HomeScreen />} />
-            </Routes>
-          </Container>
-        </main>
-        <footer>
-          <div className="text-center footer">All rights reserved</div>
-        </footer>
-      </div>
+            {/* Admin Routes */}
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminRoute>
+                  <DashboardScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/orders"
+              element={
+                <AdminRoute>
+                  <OrderListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/users"
+              element={
+                <AdminRoute>
+                  <UserListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/product/:id"
+              element={
+                <AdminRoute>
+                  {" "}
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path="/admin/user/:id"
+              element={
+                <AdminRoute>
+                  <UserEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+          </Routes>
+        </Container>
+      </main>
+      <footer>
+        <div className="text-center footer">All rights reserved</div>
+      </footer>
+    </div>
   );
 }
 

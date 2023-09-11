@@ -11,9 +11,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 .site-container {
-  min-height: 100vh;
+  min-height: 100%;
   }
 
   .navInfo {
@@ -23,7 +24,7 @@ body {
     margin-left: 60px;
   }
 main {
-  flex: 1;
+  flex-grow: 1;
 }
 
 .header{
@@ -96,7 +97,7 @@ main {
   max-height: 100vh;
   position: absolute;
   left: -300px;
-  background-color:lightblue;
+  background-color:black;
   transition: 0.5s;
 }
 
@@ -190,8 +191,24 @@ button.thumbnail {
     margin-top: 10rem;
 
 }
-.social-icons {
+.image-slider {
+  width:100%;
+}
+ .img{
+height: 800px;
+width:800px;
+}
+.image-flex {
+  display:flex;
+  align-items:center;
+  }
+.image-struc {
+  height: 300px;
+  width: 300px;
+  margin:10px
   
+}
+.social-icons {
   display: flex;
   justify-content: center;
    background: lightgray;
